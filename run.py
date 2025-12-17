@@ -1,5 +1,5 @@
 from sqrtsolvers.benchmarking.benchmark import run_benchmark, print_results, Solver
-from sqrtsolvers.solvers import eigh, lanczos, newton_schulz
+from sqrtsolvers.solvers import eigh, lanczos, newton_schulz, chebyshev
 
 def main():
     """
@@ -11,6 +11,8 @@ def main():
         Solver("Lanczos (k=50)", lambda A, b: lanczos.solve_lanczos(A, b, k=50), warm_start=False),
         Solver("Newton-Schulz (k=5)", lambda A, b: newton_schulz.solve_ns(A, b, max_iter=5), warm_start=False),
         Solver("Newton-Schulz (k=50)", lambda A, b: newton_schulz.solve_ns(A, b, max_iter=50), warm_start=False),
+        Solver("Chebyshev (k=5)", lambda A, b: chebyshev.solve_chebyshev(A, b, k=5), warm_start=False),
+        Solver("Chebyshev (k=50)", lambda A, b: chebyshev.solve_chebyshev(A, b, k=50), warm_start=False),
     ]
 
 
