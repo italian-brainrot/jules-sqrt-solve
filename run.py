@@ -1,5 +1,5 @@
 from sqrtsolvers.benchmarking.benchmark import run_benchmark, print_results, plot_results, Solver
-from sqrtsolvers.solvers import eigh, lanczos, newton_schulz, chebyshev
+from sqrtsolvers.solvers import eigh, lanczos, chebyshev
 
 def main():
     """
@@ -7,12 +7,9 @@ def main():
     """
     solvers = [
         Solver("Eigendecomposition", lambda A, b: eigh.solve_eigh(A, b), warm_start=False),
-        Solver("Lanczos (k=5)", lambda A, b: lanczos.solve_lanczos(A, b, k=5), warm_start=False),
-        Solver("Lanczos (k=50)", lambda A, b: lanczos.solve_lanczos(A, b, k=50), warm_start=False),
-        Solver("Newton-Schulz (k=5)", lambda A, b: newton_schulz.solve_ns(A, b, max_iter=5), warm_start=False),
-        Solver("Newton-Schulz (k=50)", lambda A, b: newton_schulz.solve_ns(A, b, max_iter=50), warm_start=False),
-        Solver("Chebyshev (k=5)", lambda A, b: chebyshev.solve_chebyshev(A, b, k=5), warm_start=False),
-        Solver("Chebyshev (k=50)", lambda A, b: chebyshev.solve_chebyshev(A, b, k=50), warm_start=False),
+        Solver("Lanczos (k=10)", lambda A, b: lanczos.solve_lanczos(A, b, k=10), warm_start=False),
+        Solver("Lanczos (k=100)", lambda A, b: lanczos.solve_lanczos(A, b, k=100), warm_start=False),
+        Solver("Chebyshev", lambda A, b: chebyshev.solve_chebyshev(A, b), warm_start=False),
     ]
 
 

@@ -4,16 +4,13 @@ This repository contains the implementation and benchmarking of solvers for the 
 
 ## Solvers
 
-Currently four solvers are implemented in this repository:
+Currently the following solvers are implemented in this repository:
 
 1.  **Eigendecomposition**: This method computes the eigendecomposition of the matrix A to find its square root and then solves the system directly. It is accurate and robust but can be computationally expensive for large matrices.
 
 2.  **Lanczos**: This is an iterative method for finding eigenvalues and eigenvectors of a symmetric matrix. In this repository, the Lanczos algorithm is used to approximate A^(-1/2)b.
 
-3.  **Newton-Schulz**: This is an iterative solver based on the Newton-Schulz iteration for finding the inverse square root of the matrix A. The iteration is given by:
-    X_{k+1} = 0.5 * X_k * (3I - A * X_k^2)
-
-4.  **Chebyshev**: This method approximates the function f(z) = z^(-1/2) with a Chebyshev polynomial, and then computes the solution as a matrix-polynomial-vector product. It can be more stable than Newton-Schulz for ill-conditioned matrices.
+3.  **Chebyshev**: This method approximates the function f(z) = z^(-1/2) with a Chebyshev polynomial, and then computes the solution as a matrix-polynomial-vector product. It can be more stable than Newton-Schulz for ill-conditioned matrices.
 
 ## Benchmarking
 
@@ -34,5 +31,4 @@ The benchmark results are summarized in the plot below:
 
 *   **Eigendecomposition**: This method remains the most accurate and is very fast for the matrix sizes tested.
 *   **Lanczos**: The Lanczos method provides a good approximation for well-conditioned matrices, but its accuracy degrades significantly as the condition number increases.
-*   **Newton-Schulz**: This solver outperforms Lanczos slightly on very small matrices. Its performance degrades with increasing condition number, and it can be unstable for ill-conditioned matrices.
 *   **Chebyshev**: The Chebyshev solver is a competitive alternative to the other iterative methods. It is significantly faster than Eigendecomposition and Newton-Schulz for larger matrices. Its accuracy is comparable to Lanczos, and it is more stable than Newton-Schulz for ill-conditioned matrices.
