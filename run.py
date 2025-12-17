@@ -14,8 +14,8 @@ def main():
     ]
 
 
-    matrix_sizes = [10, 50, 100, 500, 1000]
-    condition_numbers = [1e1, 1e2, 1e4, 1e8]
+    matrix_sizes = [10, 100, 1000]
+    condition_numbers = [1e1, 1e4, 1e8]
 
     results = run_benchmark(solvers, matrix_sizes, condition_numbers)
     print_results(results)
