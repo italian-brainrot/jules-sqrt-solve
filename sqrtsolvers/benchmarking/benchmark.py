@@ -100,3 +100,49 @@ def print_results(results):
     for res in results:
         print(f"{res['solver']:<30} | {res['size']:<10} | {res['condition_number']:<10.0e} | {res['time']:<15.6f} | {res['error']:<15.6e}")
     print("-" * 80)
+
+
+def plot_results(results):
+    """
+    Plots the benchmark results.
+    Args:
+        results (list): The list of benchmark results.
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    solvers = sorted(list(set([r['solver'] for r in results])))
+    matrix_sizes = sorted(list(set([r['size'] for r in results])))
+    condition_numbers = sorted(list(set([r['condition_number'] for r in results])))
+
+    metrics = ['time', 'error']
+    fig, axes = plt.subplots(len(metrics), len(matrix_sizes), figsize=(len(matrix_sizes) * 6, len(metrics) * 5), squeeze=False)
+
+    for i, metric in enumerate(metrics):
+        for j, size in enumerate(matrix_sizes):
+            ax = axes[i, j]
+
+            data_for_size = [r for r in results if r['size'] == size]
+
+            x = np.arange(len(condition_numbers))
+            width = 0.8 / len(solvers)
+
+            for k, solver in enumerate(solvers):
+                solver_data = [r for r in data_for_size if r['solver'] == solver]
+                values = [r[metric] for r in solver_data]
+
+                offset = (k - len(solvers) / 2) * width + width / 2
+                ax.bar(x + offset, values, width, label=solver)
+
+            ax.set_xticks(x)
+            ax.set_xticklabels([f'{c:.0e}' for c in condition_numbers])
+            ax.set_xlabel('Condition Number')
+            ax.set_ylabel(metric.capitalize())
+            ax.set_title(f'{metric.capitalize()} for Matrix Size {size}')
+            ax.legend()
+            if metric == 'error':
+                ax.set_yscale('log')
+
+    plt.tight_layout()
+    plt.savefig('benchmark_plot.png')
+    plt.close()
