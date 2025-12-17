@@ -1,4 +1,4 @@
-from sqrtsolvers.benchmarking.benchmark import run_benchmark, print_results, Solver
+from sqrtsolvers.benchmarking.benchmark import run_benchmark, print_results, plot_results, Solver
 from sqrtsolvers.solvers import eigh, lanczos, newton_schulz, chebyshev
 
 def main():
@@ -21,6 +21,7 @@ def main():
 
     results = run_benchmark(solvers, matrix_sizes, condition_numbers)
     print_results(results)
+    plot_results(results)
 
 if __name__ == '__main__':
     main()
