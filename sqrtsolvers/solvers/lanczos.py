@@ -4,6 +4,7 @@ from scipy.linalg import eigh_tridiagonal
 def solve_lanczos(A, b, k=20):
     """
     Solves the system A^(1/2)x = b using the Lanczos algorithm to approximate A^(-1/2)b.
+    This implementation uses full reorthogonalization to improve numerical stability.
 
     Args:
         A (np.ndarray): The matrix A.
@@ -26,6 +27,9 @@ def solve_lanczos(A, b, k=20):
         v = v - alphas[j] * q
         if j > 0:
             v = v - betas[j-1] * Q[:, j-1]
+
+        # Reorthogonalization
+        v = v - Q[:, :j+1] @ (Q[:, :j+1].T @ v)
 
         if j < k - 1:
             beta = np.linalg.norm(v)
