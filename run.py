@@ -12,8 +12,8 @@ def main():
         Solver("Chebyshev", lambda A, b: chebyshev.solve_chebyshev(A, b), warm_start=False),
         Solver("Newton-Schulz (k=1)", lambda A, b: newton_schulz.solve_ns(A, b, max_iter=1), warm_start=False),
         Solver("Newton-Schulz (k=3)", lambda A, b: newton_schulz.solve_ns(A, b, max_iter=3), warm_start=False),
-        Solver("CG Lanczos (k=10)", lambda A, b: cg_lanczos.solve_cg_lanczos(A, b, lanczos_k=10), warm_start=False),
-        Solver("CG Lanczos (k=100)", lambda A, b: cg_lanczos.solve_cg_lanczos(A, b, lanczos_k=100), warm_start=False),
+        Solver("CG Lanczos (k=10)", lambda A, b: cg_lanczos.solve_cg_lanczos(A, b, max_iter=10), warm_start=False),
+        Solver("CG Lanczos (k=30)", lambda A, b: cg_lanczos.solve_cg_lanczos(A, b, max_iter=30), warm_start=False),
     ]
 
 
