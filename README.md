@@ -12,6 +12,8 @@ Currently the following solvers are implemented in this repository:
 
 3.  **Chebyshev**: This method approximates the function f(z) = z^(-1/2) with a Chebyshev polynomial, and then computes the solution as a matrix-polynomial-vector product. It can be more stable than Newton-Schulz for ill-conditioned matrices.
 
+4.  **Newton-Schulz**: This is an iterative method for computing the inverse square root of a matrix. It is based on a matrix version of the Newton-Raphson method for finding roots of a function.
+
 ## Benchmarking
 
 The solvers are benchmarked on a range of symmetric positive definite matrices with varying sizes and condition numbers. The following metrics are used for comparison:
@@ -32,3 +34,4 @@ The benchmark results are summarized in the plot below:
 *   **Eigendecomposition**: This method remains the most accurate and is very fast for the matrix sizes tested.
 *   **Lanczos**: The Lanczos method provides a good approximation for well-conditioned matrices, but its accuracy degrades significantly as the condition number increases.
 *   **Chebyshev**: The Chebyshev solver is a competitive alternative to the other iterative methods. It is significantly faster than Eigendecomposition and Newton-Schulz for larger matrices. Its accuracy is comparable to Lanczos, and it is more stable than Newton-Schulz for ill-conditioned matrices.
+*   **Newton-Schulz**: This method is competitive for well-conditioned matrices but, as shown in the benchmark, it becomes unstable and fails to converge for matrices with high condition numbers.
