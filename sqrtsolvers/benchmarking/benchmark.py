@@ -63,6 +63,9 @@ def run_benchmark(solvers: list[Solver], matrix_sizes: list[int], condition_numb
 
             for solver in solvers:
 
+                # do a warm-up
+                solver.func(A, b)
+
                 x0 = None
                 if solver.warm_start:
                     x0 = solver.func(A2, b2, x0=None)
