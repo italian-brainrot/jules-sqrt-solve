@@ -2,7 +2,7 @@ import numpy as np
 
 def inv_sqrt_ns(A, tol=1e-6, max_iter=100):
     """
-    Computes A^(-1/2) using a iterative method based on the Newton-Schulz iteration.
+    Computes the inverse square root of a matrix A using the Newton-Schulz method.
 
     Args:
         A (np.ndarray): The matrix A.
