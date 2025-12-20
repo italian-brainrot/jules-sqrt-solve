@@ -1,5 +1,5 @@
 from sqrtsolvers.benchmarking.benchmark import run_benchmark, print_results, plot_results, Solver
-from sqrtsolvers.solvers import eigh, lanczos, chebyshev, newton_schulz, cg_lanczos
+from sqrtsolvers.solvers import eigh, lanczos, chebyshev, newton_schulz, cg_lanczos, preconditioned_cg
 
 def main():
     """
@@ -14,6 +14,8 @@ def main():
         Solver("Newton-Schulz (k=3)", lambda A, b: newton_schulz.solve_ns(A, b, max_iter=3), warm_start=False),
         Solver("CG Lanczos (k=10)", lambda A, b: cg_lanczos.solve_cg_lanczos(A, b, max_iter=10), warm_start=False),
         Solver("CG Lanczos (k=30)", lambda A, b: cg_lanczos.solve_cg_lanczos(A, b, max_iter=30), warm_start=False),
+        Solver("Preconditioned CG (k=10, cheby_k=10)", lambda A, b, x0=None: preconditioned_cg.solve_pcg_chebyshev(A, b, x0=x0, lanczos_k=10, chebyshev_k=10), warm_start=True),
+        Solver("Preconditioned CG (k=30, cheby_k=20)", lambda A, b, x0=None: preconditioned_cg.solve_pcg_chebyshev(A, b, x0=x0, lanczos_k=30, chebyshev_k=20), warm_start=True),
     ]
 
 

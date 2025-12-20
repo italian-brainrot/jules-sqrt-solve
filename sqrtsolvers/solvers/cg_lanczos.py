@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.linalg import eigh_tridiagonal
 
 def lanczos_algorithm(A, v, k):
     """
@@ -47,7 +48,7 @@ def apply_A_sqrt(A, p, k=10):
 
     Q, T = lanczos_algorithm(A, p, k)
 
-    eigvals, eigvecs = np.linalg.eigh(T)
+    eigvals, eigvecs = eigh_tridiagonal(np.diag(T), np.diag(T, k=1))
     eigvals = np.maximum(eigvals, 1e-12)
     T_sqrt = eigvecs @ np.diag(np.sqrt(eigvals)) @ eigvecs.T
 
