@@ -1,8 +1,8 @@
 import numpy as np
 import numpy as np
-from sqrtsolvers.solvers.cg_lanczos import apply_A_sqrt
-from sqrtsolvers.solvers.chebyshev import chebyshev_poly
-from sqrtsolvers.solvers.lanczos import lanczos_tridiag
+from .cg_lanczos import apply_A_sqrt
+from .chebyshev import chebyshev_poly
+from .lanczos import lanczos_tridiag
 
 def solve_pcg_chebyshev(A, b, x0=None, max_iter=100, tol=1e-6, lanczos_k=30, chebyshev_k=10):
     """
