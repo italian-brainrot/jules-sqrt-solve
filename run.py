@@ -1,5 +1,5 @@
 from sqrtsolvers.benchmarking.benchmark import run_benchmark, print_results, plot_results, Solver
-from sqrtsolvers.solvers import eigh, lanczos, chebyshev, newton_schulz, cg_lanczos, preconditioned_cg
+from sqrtsolvers.solvers import eigh, lanczos, chebyshev, newton_schulz, cg_lanczos, preconditioned_cg, pcg_chebyshev_fixed
 
 def main():
     """
@@ -15,6 +15,7 @@ def main():
         Solver("CG Lanczos (k=10)", lambda A, b: cg_lanczos.solve_cg_lanczos(A, b, max_iter=10), warm_start=False),
         Solver("CG Lanczos (k=30)", lambda A, b: cg_lanczos.solve_cg_lanczos(A, b, max_iter=30), warm_start=False),
         Solver("PCG-Chebyshev", lambda A, b, x0=None: preconditioned_cg.solve_pcg_chebyshev(A, b, x0=x0, max_iter=10, lanczos_k=10, chebyshev_k=10), warm_start=True),
+        Solver("PCG-Chebyshev-Fixed", lambda A, b, x0=None: pcg_chebyshev_fixed.solve_pcg_chebyshev_fixed(A, b, x0=x0, max_iter=10, lanczos_k=10, chebyshev_k=10), warm_start=True),
     ]
 
 
