@@ -3,10 +3,11 @@ from .cg_lanczos import apply_A_sqrt
 from .chebyshev import chebyshev_poly
 from .lanczos import lanczos_tridiag
 
-def solve_pcg_chebyshev_fixed(A, b, x0=None, max_iter=100, tol=1e-6, lanczos_k=30, chebyshev_k=10):
+def solve_pcg_chebyshev_tuned(A, b, x0=None, max_iter=100, tol=1e-6, lanczos_k=50, chebyshev_k=20):
     """
     Solves A^(1/2)x = b using the preconditioned conjugate gradient method
     with a Chebyshev polynomial preconditioner with a fixed spectrum estimate.
+    This version is tuned for higher accuracy.
 
     Args:
         A (np.ndarray): The matrix A.
